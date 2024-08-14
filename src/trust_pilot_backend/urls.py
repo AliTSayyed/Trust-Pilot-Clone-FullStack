@@ -26,5 +26,6 @@ urlpatterns = [
     path('users/', views.user_list),
     path('users/<int:id>', views.user_details),
     path('reviews/freelancers/<int:id>', views.freelancer_reviews),
+    path('sort_and_filter_reviews/', views.sort_and_filter_reviews),
     path('admin/', admin.site.urls),
 ]

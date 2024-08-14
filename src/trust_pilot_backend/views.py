@@ -1,3 +1,4 @@
+from datetime import datetime
 from .models import Reviews, Freelancers, Users
 from .serializer import ReviewsSearializer, FreelancersSearializer, UsersSearializer
 from rest_framework.decorators import api_view
@@ -117,3 +118,32 @@ def freelancer_reviews(request, id):
   reviews_of_freelancer = Reviews.objects.filter(freelancer=id)
   serializer = ReviewsSearializer(reviews_of_freelancer, many=True)
   return Response(serializer.data)
+
+@api_view(['GET']) # end point for sorting and filtering reviews
+def sort_and_filter_reviews(request):
+  if request.method == 'GET':
+    reviews = Reviews.objects.all()
+
+    # Apply query paramters
+    rating_param = request.GET.get('rating', None)
+    date_param = request.GET.get('date', None)
+    freelancer_id_param = request.GET.get('freelancer', None)
+
+    # if the query paramater exists, filter by the query paramater
+    if rating_param:
+      reviews = Reviews.objects.filter(rating=rating_param)
+    
+    if date_param: # if a date is sent in the url, need to parse it so that it can be compared with the reviews table data field. 
+            try:
+              # Parse the date from the query param
+              parsed_date = datetime.strptime(date_param, '%Y-%m-%d').date()  # Parse 'YYYY-MM-DD' format
+              reviews = reviews.filter(date__date=parsed_date)  # Filter by date (ignoring time)
+            except ValueError:
+                return Response({'error': 'Invalid date format. Use YYYY-MM-DD.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if freelancer_id_param:
+      reviews = Reviews.objects.filter(freelancer=freelancer_id_param)
+
+    # send the filtered reviews 
+    serializer = ReviewsSearializer(reviews, many=True)
+    return Response(serializer.data)
