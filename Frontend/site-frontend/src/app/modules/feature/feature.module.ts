@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { SubmitReviewComponent } from './submit-review/submit-review.component';
 import { FreelancerReviewComponent } from './freelancer-review/freelancer-review.component';
 import { HeaderComponent } from '../shared/header/header.component';
+import { ButtonModule } from 'primeng/button';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { HeaderComponent } from '../shared/header/header.component';
   imports: [
     CommonModule,
     FeatureRoutingModule,
-    HeaderComponent
-  ],
+    HeaderComponent,
+    ButtonModule, 
+    SharedModule
+],
 })
 export class FeatureModule { }

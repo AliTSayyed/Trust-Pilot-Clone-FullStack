@@ -39,6 +39,6 @@
     <app-footer></app-footer>
 
 - app.component.ts is what appears on the screen. you can choose what is displayed on the screen my modifying the html of app.component OR you set the app.routes.ts  TO SHOW SPECIFIC COMPONENTS YOU WANT BASED ON A PATH A USER IS ON.
-
+- Style the site with scss, also I am using Primeng for ui tools. Run npm install primeng --save to use primeng tools. 
 (Fethcing Data From the Backend)
 

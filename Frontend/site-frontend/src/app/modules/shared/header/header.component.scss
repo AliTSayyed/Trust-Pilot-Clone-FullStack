@@ -1,0 +1,32 @@
+.wrapper{
+  width: 100%;
+  height: 80px;
+  box-shadow: var(--border-box-shadow);
+  padding: 20px 10px;
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  align-items: center;
+}
+
+.logo-image{
+  height: 125%;
+  object-fit: contain;
+  align-items: center;
+  padding-bottom: 2px;
+}
+
+.logo-name {
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.button-row {
+  width: 100%;
+  padding-right: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+
