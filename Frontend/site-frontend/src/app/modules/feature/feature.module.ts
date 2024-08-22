@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { SharedModule } from '../shared/shared.module';
 
 
+
 @NgModule({
   declarations: [HomeComponent, SubmitReviewComponent, FreelancerReviewComponent],
   imports: [
@@ -17,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     FeatureRoutingModule,
     HeaderComponent,
     ButtonModule, 
-    SharedModule
+    SharedModule,
 ],
 })
 export class FeatureModule { }

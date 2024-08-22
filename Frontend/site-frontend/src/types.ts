@@ -29,7 +29,7 @@ export interface Review{
   id?:number,
   user: string,
   rating: number,
-  reviewText: string,
+  review_text: string,
   date: string,
   freelancer: string
 }

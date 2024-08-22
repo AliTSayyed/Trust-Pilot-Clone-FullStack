@@ -7,9 +7,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { FilterComponent } from './filter/filter.component';
 import { ButtonModule } from 'primeng/button';
+import { ReviewComponent } from './review/review.component';
 
 @NgModule({
-  declarations: [FilterComponent],
+  declarations: [FilterComponent, ReviewComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
@@ -18,6 +19,6 @@ import { ButtonModule } from 'primeng/button';
     ToolbarModule, 
     ButtonModule
   ],
-  exports: [HeaderComponent, FooterComponent, FilterComponent]
+  exports: [HeaderComponent, FooterComponent, FilterComponent, ReviewComponent]
 })
 export class SharedModule { }

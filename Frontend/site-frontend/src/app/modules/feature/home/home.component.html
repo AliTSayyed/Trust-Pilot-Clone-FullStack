@@ -28,11 +28,16 @@
 </div>
 
 <!-- Browse Reviews banner -->
-<div class="browse-reviews column full-center">
+<div class="browse-reviews column full-center negate-main-padding">
   &darr; Browse Our Freelancer Reviews &darr;
 </div>
 
 <!-- Filter Component -->
-<div clas="filter-wrapper">
+<div class="filter-wrapper">
   <app-filter></app-filter>
+</div>
+
+<!-- Review boxes-->
+<div class="row wrap gap-1 space-between">
+  <app-review *ngFor="let review of reviews" [review]="review"></app-review>
 </div>

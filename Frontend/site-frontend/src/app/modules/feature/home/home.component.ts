@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReviewsService } from '../../core/services/reviews.service';
-import { Reviews } from '../../../../types';
+import { Review, Reviews } from '../../../../types';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +12,13 @@ export class HomeComponent {
 
   constructor(private reviewService: ReviewsService){}
 
+  reviews: Review[] = [];
+
+
   ngOnInit() {
     this.reviewService.getReviews('http://127.0.0.1:8000/api/reviews/',{page: 1, perPage:5} ).subscribe((reviews: Reviews) => {
-      console.log(reviews);
+      console.log(reviews.reviews);
+      this.reviews = reviews.reviews;
     })
   }
 }
