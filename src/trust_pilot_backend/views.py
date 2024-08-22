@@ -4,15 +4,39 @@ from .serializer import ReviewsSearializer, FreelancersSearializer, UsersSearial
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # create views for CRUD operations and logic for backend
 
 @api_view(['GET', 'POST']) # retrieve all the reviews and post a review 
 def review_list(request): 
   if request.method == 'GET':
+    page = request.query_params.get('page', 1)
+    per_page = request.query_params.get('perPage', 10)
+
     reviews = Reviews.objects.all()
-    serializer = ReviewsSearializer(reviews, many=True) # serialize all the reviews in the db
-    return Response(serializer.data) # return a 200 response 
+
+    paginator = Paginator(reviews, per_page)
+
+    try:
+        reviews_page = paginator.page(page)
+    except PageNotAnInteger:
+        reviews_page = paginator.page(1)
+    except EmptyPage:
+        reviews_page = paginator.page(paginator.num_pages)
+
+    # Serialize the reviews on the current page
+    serializer = ReviewsSearializer(reviews_page, many=True)
+
+    # Return the paginated response
+    return Response({
+        'reviews': serializer.data,
+        'total': paginator.count,
+        'page': reviews_page.number,
+        'perPage': per_page,
+        'totalPages': paginator.num_pages,
+    }, status=status.HTTP_200_OK)
+
   elif request.method == 'POST':
     serializer = ReviewsSearializer(data=request.data) # take the request data, and pass it into the serailzer
     if serializer.is_valid():
