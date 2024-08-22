@@ -19,13 +19,13 @@ from django.urls import path
 from trust_pilot_backend import views
 
 urlpatterns = [
-    path('reviews/', views.review_list),
-    path('reviews/<int:id>', views.review_details),
-    path('freelancers/', views.freelancer_list),
-    path('freelancers/<int:id>', views.freelancer_details),
-    path('users/', views.user_list),
-    path('users/<int:id>', views.user_details),
-    path('reviews/freelancers/<int:id>', views.freelancer_reviews),
-    path('sort_and_filter_reviews/', views.sort_and_filter_reviews),
+    path('api/reviews/', views.review_list),
+    path('api/reviews/<int:id>', views.review_details),
+    path('api/freelancers/', views.freelancer_list),
+    path('api/freelancers/<int:id>', views.freelancer_details),
+    path('api/users/', views.user_list),
+    path('api/users/<int:id>', views.user_details),
+    path('api/reviews/freelancers/<int:id>', views.freelancer_reviews),
+    path('api/sort_and_filter_reviews/', views.sort_and_filter_reviews),
     path('admin/', admin.site.urls),
 ]
