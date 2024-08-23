@@ -16,7 +16,7 @@ export class HomeComponent {
 
 
   ngOnInit() {
-    this.reviewService.getReviews('http://127.0.0.1:8000/api/reviews/',{page: 1, perPage:5} ).subscribe((reviews: Reviews) => {
+    this.reviewService.getReviews('http://127.0.0.1:8000/api/reviews/',{page: 1, perPage:9} ).subscribe((reviews: Reviews) => {
       console.log(reviews.reviews);
       this.reviews = reviews.reviews;
     })

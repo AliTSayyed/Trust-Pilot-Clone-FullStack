@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./styles/variables.scss";
-@import "primeng/resources/themes/luna-amber/theme.css";
+@import "primeng/resources/themes/arya-orange/theme.css";
 @import "primeng/resources/primeng.css";
 html,
 body,
@@ -51,6 +51,14 @@ app-root {
   margin-bottom: 25px;
 }
 
+.mr-15 {
+  margin-right: 15px;
+}
+
+.ml-15{
+  margin-left: 15px;
+}
+
 .wrap {
   flex-wrap: wrap;
 }
@@ -66,6 +74,7 @@ app-root {
 .gap-2 {
   gap: 2rem;
 }
+
 
 .space-between {
   justify-content: space-between;
@@ -92,3 +101,7 @@ app-root {
   justify-content: flex-end;
 }
 
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

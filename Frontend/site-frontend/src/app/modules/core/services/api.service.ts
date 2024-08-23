@@ -10,9 +10,9 @@ export class ApiService {
 
   constructor(
     private httpClient: HttpClient // client used to make rest api calls 
-  ) {}
+) {}
 
-  get<T>(url:string, options:Options ): Observable<T> {
+  get<T>(url:string, options?:Options ): Observable<T> {
     return this.httpClient.get<T>(url, options) as Observable<T>;
   }
 }

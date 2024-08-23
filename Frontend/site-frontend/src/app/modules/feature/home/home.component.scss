@@ -31,6 +31,7 @@
     width: 40%;
     font-weight: 500;
     font-size: 30px;
+    color: var(--primary-color);
   }
 }
 
@@ -45,9 +46,11 @@
 
 .mouse {
   padding-left: 30px;
+  padding-top: 20px;
+  flex-shrink: 1;
   .mouse-image {
     width: 2%;
-    height: auto;
+    height: 1%;
   }
 }
 
