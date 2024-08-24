@@ -12,7 +12,6 @@
 
 .title-left-color {
   color: var(--secondary-color);
-  text-shadow: -3px 3px 0 rgba(0, 0, 0, 0.5);
 }
 
 .title-left-style {
@@ -31,7 +30,6 @@
     width: 40%;
     font-weight: 500;
     font-size: 30px;
-    color: var(--primary-color);
   }
 }
 
@@ -55,18 +53,28 @@
 }
 
 .browse-reviews {
-  margin-top: 30px;
+  margin-top: 20px;
   width: auto;
   background-color: var(--secondary-color);
   padding: 20px 0;
   box-shadow: var(--border-box-shadow);
   font-size: 30px;
   font-weight: 600;
-  color: var(--primary-color);
+  color: white
 }
 
-.negate-main-padding {
-  width: 100vw; /* Ensures full width */
-  margin-left: calc(-1 * 20px); /* Negates padding on the left */
-  margin-right: calc(-1 * 20px); /* Negates padding on the right */
+.filter {
+  margin-top: 20px;
+}
+
+.Paginator {
+  padding-top: 20px;
+  margin-bottom: -5px; 
+  
+}
+
+:host {
+  ::ng-deep .custom-paginator {
+    border-radius: 0px;
+  }
 }

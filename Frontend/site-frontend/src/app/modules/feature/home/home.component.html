@@ -11,7 +11,7 @@
     </div>
     <div class="button-container row gap-2">
       <button pButton label="Browse Reviews" severity="secondary"></button>
-      <button pButton label="Write a Review" severity="primary"></button>
+      <button pButton label="Write a Review" severity="primary" (click)="submissionPage()"></button>
     </div>
   </div>
 
@@ -28,16 +28,28 @@
 </div>
 
 <!-- Browse Reviews banner -->
-<div class="browse-reviews column full-center negate-main-padding">
+<div class="browse-reviews column full-center full-width-element">
   &darr; Browse Our Freelancer Reviews &darr;
 </div>
 
 <!-- Filter Component -->
-<div class="filter-wrapper">
-  <app-filter></app-filter>
+<div class="filter">
+  <app-filter styleClass="custom-filter"></app-filter>
 </div>
 
 <!-- Review boxes-->
 <div class="grid wrap gap-1 space-between">
   <app-review *ngFor="let review of reviews" [review]="review"></app-review>
+</div>
+
+<!-- Paginator -->
+
+<div class="Paginator full-width-element">
+  <p-paginator styleClass="custom-paginator"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[9, 15, 30]"
+    [showCurrentPageReport]="true"
+    (onPageChange)="onPageChange($event)"
+  ></p-paginator>
 </div>

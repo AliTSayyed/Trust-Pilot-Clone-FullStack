@@ -1,1 +1,62 @@
-<p>This is where you submit the review</p>
+<!--Review Post Section-->
+<div class="main-post-section column">
+  <div class="title-image-top">
+    <div class="title-content">
+      <div class="main-post-title">Worked with a Freelancer?</div>
+      <div class="title-caption">Tell us about your experience!</div>
+    </div>
+    <div class="review-icon">
+      <img class="review-image" src="images/reviews-icon.png" />
+    </div>
+  </div>
+
+  <form class="column gap-1" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <!-- Name Field -->
+    <div class="name-input">
+      <p-inputGroup class="Name-field">
+        <input
+          class="form-control"
+          formControlName="name"
+          pInputText
+          placeholder="Name"
+        />
+      </p-inputGroup>
+    </div>
+    <div class="freelancer-input">
+      <p-inputGroup class="Name-field">
+        <input
+          class="form-control"
+          formControlName="freelancer"
+          pInputText
+          placeholder="Freelancer"
+        />
+      </p-inputGroup>
+    </div>
+    <div class="rating-container">
+      <div class="rating-field">Rating (1-5)</div>
+      <p-inputGroup>
+        <p-rating formControlName="rating" [cancel]="false" />
+      </p-inputGroup>
+    </div>
+    <!-- Textarea for a longer text input (like a review or comment) -->
+    <div>
+      <p-inputGroup>
+        <textarea
+          class="form-control review-input"
+          formControlName="review_text"
+          placeholder="Write your review here"
+          required
+        ></textarea>
+      </p-inputGroup>
+    </div>
+    <div class="submit-button">
+      <!-- Submit button -->
+      <button
+        pButton
+        label="Submit Review"
+        icon="pi pi-check"
+        type="submit"
+      ></button>
+    </div>
+  </form>
+</div>

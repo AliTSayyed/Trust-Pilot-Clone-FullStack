@@ -1,0 +1,77 @@
+.main-post-section {
+  background-color: white;
+  display: flex;
+  width: 35%;
+  height: 95%;
+  margin: auto;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 5px solid var(--primary-color);
+  overflow: auto;
+}
+
+.title-image-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-post-title {
+  padding-top: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
+}
+
+.title-caption {
+  color: grey;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.main-post-title,
+.title-caption {
+  padding-left: 20px;
+}
+
+.red-astricks {
+  color: red;
+}
+
+.review-icon {
+  margin-top: 30px;
+  margin-right: 50px;
+  margin-bottom: -80px;
+}
+
+.review-image {
+  width: 150px;
+  /* Set the desired width for the image */
+
+}
+
+.Name-field {
+ width: 50%;
+ padding-left: 10px;
+}
+
+.rating-container{
+  padding-left: 10px;
+}
+.rating-field{
+  margin-top: -5px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.review-input{
+  width: 60%;
+  height: 200%;
+  margin-left: 10px;
+}
+
+.submit-button button[pButton] {
+  margin-left: 10px;
+  margin-top: 50px;
+}

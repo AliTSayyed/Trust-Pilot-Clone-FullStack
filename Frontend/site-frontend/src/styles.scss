@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./styles/variables.scss";
-@import "primeng/resources/themes/arya-orange/theme.css";
+@import "primeng/resources/themes/lara-light-purple/theme.css";
 @import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
 html,
 body,
 p,
@@ -104,4 +106,10 @@ app-root {
 .grid{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.full-width-element {
+  margin-left: -20px;
+  margin-right: -20px;
+  width: calc(100% + 40px); /* Adjust width to account for negative margins */
 }
