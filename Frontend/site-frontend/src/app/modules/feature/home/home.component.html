@@ -10,22 +10,21 @@
       Sumbit your own reviews and browse many more below!
     </div>
     <div class="button-container row gap-2">
-      <button pButton label="Browse Reviews" severity="secondary"></button>
+      <button pButton label="Browse Reviews" severity="secondary" (click)="browseReviews()"></button>
       <button pButton label="Write a Review" severity="primary" (click)="submissionPage()"></button>
     </div>
+    <div class="mouse row align-center gap-1">
+      <img class="mouse-image" src="images/mouse-3.png" />
+      <div class="caption">Scroll down to browse reviews &darr;</div>
+    </div>    
   </div>
 
   <div class="right-main column">
-    <img class="front-page-pictures" src="images/front-page-pictures.png" />
+    <img class="front-page-pictures" src="images/front-page-pictures-4.png" />
   </div>
 </div>
 
 <!-- Scroll down mouse -->
-
-<div class="mouse row align-center gap-1">
-  <img class="mouse-image" src="images/mouse-3.png" />
-  <div class="caption">Scroll down to browse reviews &darr;</div>
-</div>
 
 <!-- Browse Reviews banner -->
 <div class="browse-reviews column full-center full-width-element">

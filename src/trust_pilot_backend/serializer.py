@@ -5,10 +5,10 @@ from .models import Reviews, Freelancers, Users
 
 class ReviewsSearializer(serializers.ModelSerializer):
  # These fields will accept user_name and freelancer_name in the POST request
-  user_name = serializers.CharField(write_only=True)
-  freelancer_name = serializers.CharField(write_only=True)
-  user = serializers.PrimaryKeyRelatedField(read_only=True)
-  freelancer = serializers.PrimaryKeyRelatedField(read_only=True)
+  user_name = serializers.CharField(write_only=True) # can only have this in a post 
+  freelancer_name = serializers.CharField(write_only=True) # can only have this in a post
+  user = serializers.PrimaryKeyRelatedField(read_only=True) # can only have this in a get 
+  freelancer = serializers.PrimaryKeyRelatedField(read_only=True) # can only have this in a get 
 
   class Meta:
     model = Reviews

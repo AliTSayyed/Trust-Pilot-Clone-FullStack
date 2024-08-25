@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Freelancer, Review, User } from '../../../../types';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Review } from '../../../../types';
+import { ReviewsService } from '../../core/services/reviews.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-submit-review',
@@ -8,37 +10,53 @@ import { Freelancer, Review, User } from '../../../../types';
   styleUrl: './submit-review.component.scss',
 })
 export class SubmitReviewComponent {
-  @Output() submit = new EventEmitter<Review>();
-  
+  constructor(private reviewService: ReviewsService, private router: Router) {}
+
+  // take use to submit-review page to write a review
+  homePage() {
+    this.router.navigate(['']);
+  }
+
+  // this is the object created when a user fills in the form
   reviewForm: FormGroup = new FormGroup({
-    name: new FormControl(),
-    freelancer: new FormControl(),
-    rating: new FormControl(0),
-    review_text: new FormControl(),
+    name: new FormControl('', [Validators.required]),
+    freelancer: new FormControl('', [Validators.required]),
+    rating: new FormControl(0, [Validators.required]),
+    review_text: new FormControl('', [Validators.required]),
   });
 
-  review: Review = {
-    user: 0,
-    rating: 0,
-    review_text: "",
-    date: "",
-    freelancer: 0,
-  }
-
-  user: User = {
-    id: 0,
-    user_name: ""
-  }
-  
-  freelancer: Freelancer = {
-    id: 0,
-    freelancer_name: ""
+  submitReview(review: Review) {
+    this.reviewService
+      .postReview('http://127.0.0.1:8000/api/reviews/', review)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   onSubmit() {
-    const reviewObj = this.reviewForm.value;
-    console.log(reviewObj);
+    if (this.reviewForm.valid) {
+      const reviewObj = this.reviewForm.value;
 
-    console.log('Review sent');
+      // Creating the Review object with the correct keys
+      const review: Review = {
+        user_name: reviewObj.name,
+        freelancer_name: reviewObj.freelancer,
+        rating: reviewObj.rating,
+        review_text: reviewObj.review_text,
+        date: '',
+      };
+
+      // Directly submit the review to the backend
+      this.submitReview(review);
+      console.log(review);
+      console.log('Review sent');
+
+      this.reviewForm.reset();
+    } 
   }
 }

@@ -14,6 +14,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RatingModule } from 'primeng/rating';
+
 @NgModule({
   declarations: [HomeComponent, SubmitReviewComponent, FreelancerReviewComponent],
   imports: [
@@ -28,7 +29,7 @@ import { RatingModule } from 'primeng/rating';
     InputTextModule,
     RatingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
 ],
 })
 export class FeatureModule { }

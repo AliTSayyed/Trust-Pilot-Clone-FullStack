@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { PaginationParams, Reviews } from '../../../../types';
+import { PaginationParams, Review, Reviews } from '../../../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +16,9 @@ export class ReviewsService {
       params,
       responseType: 'json',
     });
+  }
+
+  postReview = (url:string, body:Review): Observable<any> => {
+    return this.apiService.post(url, body, {});
   }
 }

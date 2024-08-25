@@ -4,6 +4,7 @@
     <div class="title-content">
       <div class="main-post-title">Worked with a Freelancer?</div>
       <div class="title-caption">Tell us about your experience!</div>
+      <div class="title-required">All Fields Required<span class="red-astricks">*</span></div>
     </div>
     <div class="review-icon">
       <img class="review-image" src="images/reviews-icon.png" />
@@ -49,14 +50,18 @@
         ></textarea>
       </p-inputGroup>
     </div>
-    <div class="submit-button">
+    <div class="submit-button row">
       <!-- Submit button -->
+      <button pButton label="Back to Home" icon="pi pi-home" severity="primary" (click)="homePage()"></button>
       <button
         pButton
         label="Submit Review"
         icon="pi pi-check"
         type="submit"
+        severity="success"
+        [disabled]="!reviewForm.valid"
       ></button>
     </div>
   </form>
 </div>
+

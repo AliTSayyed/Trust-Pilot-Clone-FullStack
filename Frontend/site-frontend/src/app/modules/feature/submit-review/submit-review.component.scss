@@ -1,12 +1,13 @@
 .main-post-section {
-  background-color: white;
+  background-color: #efefef;
   display: flex;
   width: 35%;
-  height: 95%;
+  height: 75%;
   margin: auto;
+  margin-top: 4%;
   box-sizing: border-box;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  border: 5px solid var(--primary-color);
+  border: 5px solid var(--secondary-color);
   overflow: auto;
 }
 
@@ -24,18 +25,25 @@
 
 .title-caption {
   color: grey;
+  font-weight: 600;
   font-size: 18px;
   font-weight: normal;
   font-style: italic;
+  padding-bottom: 20px;
+}
+
+.title-required {
+  font-size: 18px;
+  color: black;
+  font-weight: normal;
+  padding-bottom: 10px;
+  font-weight: 500;
 }
 
 .main-post-title,
-.title-caption {
+.title-caption,
+.title-required {
   padding-left: 20px;
-}
-
-.red-astricks {
-  color: red;
 }
 
 .review-icon {
@@ -47,31 +55,55 @@
 .review-image {
   width: 150px;
   /* Set the desired width for the image */
-
 }
 
 .Name-field {
- width: 50%;
- padding-left: 10px;
+  width: 50%;
+  padding-left: 20px;
 }
 
-.rating-container{
-  padding-left: 10px;
+.rating-container {
+  padding-left: 20px;
 }
-.rating-field{
+.rating-field {
   margin-top: -5px;
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.review-input{
-  width: 60%;
-  height: 200%;
-  margin-left: 10px;
+.red-astricks {
+  color: red;
 }
 
+
 .submit-button button[pButton] {
-  margin-left: 10px;
-  margin-top: 50px;
+  font-size: 17px;
+  margin-left: 20px;
+  margin-top: 80px;
+  font-weight: 500;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+textarea{
+  background-color: var(--bg-color);
+  margin-left: 20px;
+  width: 60%;
+  height: 250%;
+  padding-left: 10px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+input{
+  background-color: var(--bg-color);
+  font-weight: 400;
 }

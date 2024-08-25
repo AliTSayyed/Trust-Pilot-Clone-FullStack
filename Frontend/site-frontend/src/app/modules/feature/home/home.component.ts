@@ -23,6 +23,14 @@ export class HomeComponent {
     this.router.navigate(['/submit-review']);
   }
 
+  browseReviews(){
+    window.scrollBy({
+      top: 675, // Amount to scroll down in pixels
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
   onPageChange(event: any){
     this.fetchReviews(event.page, event.rows); // this will update what reviews are shown when the paginator is interacted with
   }
