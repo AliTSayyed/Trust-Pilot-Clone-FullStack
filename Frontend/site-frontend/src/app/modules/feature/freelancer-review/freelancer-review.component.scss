@@ -1,0 +1,163 @@
+.freelancer-profile-container {
+  background-color: var(--secondary-color) ;
+  width: 40%;
+  justify-content: flex-start;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border: 5px solid #efefef;
+}
+
+.freelancer-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.freelancer-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.freelancer-image {
+  width: 150px;
+}
+
+.overall-score {
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+}
+
+.star-ratings-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-top: 20px;
+  padding-right: 80px;
+}
+
+.overall-star-image {
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.number-of-ratings {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  width: 110%;
+  border-left: 2px solid black;
+  /* Black border on the left */
+  border-bottom: 2px solid black;
+  /* Black border on the bottom */
+}
+
+.star-bar-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 4px;
+  margin-bottom: 5px;
+}
+
+.star-rank {
+  padding-right: 13px;
+  font-weight: 500;
+}
+
+.bar {
+  height: 100%;
+  background-color: #ffc300;
+  width: 100px;
+  /* Initial width (to be dynamically set with JS) */
+  transition: width 0.3s ease;
+  border-radius: 3px;
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+/* user reviews */
+
+/* Review box styling */
+.main-review-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.review-box {
+  background-color: #bdbaff;
+  height: 225px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  color: #333;
+  border: 2px solid #433bff;
+}
+
+/* User container for image and text */
+.user-container {
+  display: flex;
+  align-items: center;
+  /* Vertically aligns the image and text */
+  gap: 10px;
+  /* Adds space between the image and text */
+  font-weight: 600;
+  /* Bold text for user information */
+  margin-bottom: 5px;
+  /* Adds some space below the user info */
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+/* Image styling */
+.user-icon-image {
+  width: 40px;
+  /* Size of the image */
+  height: 40px;
+  object-fit: cover;
+  /* Ensures image maintains aspect ratio */
+  border-radius: 50%;
+  /* Makes the image round */
+}
+
+.review-date {
+  margin-right: 15px;
+}
+
+.review-description {
+  background-color: #dedcff;
+  width: 95%;
+  height: 13vh;
+  margin-left: 10px;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  overflow-y: hidden;
+  /* Add vertical scrollbar when content overflows */
+  border: none;
+}
+
+.freelancer-reviews{
+  width: 50%;
+  margin: auto;
+  padding-bottom: 20px;
+}
+

@@ -1,1 +1,43 @@
-<p>This is where freelancer reviews will be found</p>
+<!-- Freelancer-Profile -->
+
+<div class="freelancer-profile-container row gap-2">
+  
+  <div class="freelancer-image-container">
+    <div class="freelancer-name">{{ freelancer.freelancer_name }}</div>
+    <img class="freelancer-image" src="images/user-icon-5.png" />
+    <div class="overall-score">Rating: {{ score }}</div>
+  </div>
+
+  <div class="star-ratings-container">
+    <div class="number-of-ratings">
+      <div class="star-bar-line">
+        <div class="bar"></div>
+        <div class="star-rank">5 Stars (#)</div>
+      </div>
+      <div class="star-bar-line">
+        <div class="bar"></div>
+        <div class="star-rank">4 Stars (#)</div>
+      </div>
+      <div class="star-bar-line">
+        <div class="bar"></div>
+        <div class="star-rank">3 Stars (#)</div>
+      </div>
+      <div class="star-bar-line">
+        <div class="bar"></div>
+        <div class="star-rank">2 Stars (#)</div>
+      </div>
+      <div class="star-bar-line">
+        <div class="bar"></div>
+        <div class="star-rank">1 Stars (#)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- All Related Freelancer Reviews -->
+<div class="freelancer-reviews column">
+  <app-review
+    *ngFor="let review of freelancerReviews"
+    [review]="review"
+  ></app-review>
+</div>

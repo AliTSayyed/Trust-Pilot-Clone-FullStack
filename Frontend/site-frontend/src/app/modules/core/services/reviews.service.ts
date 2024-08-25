@@ -18,6 +18,12 @@ export class ReviewsService {
     });
   }
 
+  getFreelancerReviews = (url: string): Observable<Reviews> => {
+    return this.apiService.get(url, {
+      responseType: 'json',
+    });
+  }
+
   postReview = (url:string, body:Review): Observable<any> => {
     return this.apiService.post(url, body, {});
   }

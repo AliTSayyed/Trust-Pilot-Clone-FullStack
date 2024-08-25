@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Freelancer, Options, Reviews } from '../../../../types';
+import { Freelancer, Options, Review, Reviews } from '../../../../types';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,4 +16,11 @@ export class FreelancersService {
       responseType: 'json',
     });
   }
+
+  getOneFreelancer = (url: string, options?:Options): Observable<Freelancer> => {
+    return this.apiService.get(url, {
+      responseType: 'json',
+    });
+  }
+
 }

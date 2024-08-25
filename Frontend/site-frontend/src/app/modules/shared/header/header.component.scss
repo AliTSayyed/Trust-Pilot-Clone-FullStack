@@ -9,16 +9,17 @@
 }
 
 .logo-image{
-  height: 125%;
+  height: 150%;
   object-fit: contain;
   align-items: center;
   padding-bottom: 2px;
 }
 
 .logo-name {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   color: white;
+  padding-left: 5px;
 }
 
 .button-row {
@@ -28,5 +29,8 @@
   justify-content: flex-end;
 }
 
+button{
+  font-weight: 500;
+}
 
 

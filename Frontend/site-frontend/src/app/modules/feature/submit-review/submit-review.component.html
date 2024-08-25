@@ -52,13 +52,13 @@
     </div>
     <div class="submit-button row">
       <!-- Submit button -->
-      <button pButton label="Back to Home" icon="pi pi-home" severity="primary" (click)="homePage()"></button>
+      <button pButton label="Back to Home" icon="pi pi-home" severity="danger" (click)="homePage()"></button>
       <button
         pButton
         label="Submit Review"
         icon="pi pi-check"
         type="submit"
-        severity="success"
+        severity="primary"
         [disabled]="!reviewForm.valid"
       ></button>
     </div>

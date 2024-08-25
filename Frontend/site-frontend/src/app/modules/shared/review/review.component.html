@@ -1,7 +1,7 @@
 <div class="review-box mt-25">
   <div class="user-container">
     <img class="user-icon-image" src="images/user-icon-4.png">
-   {{userName}} Reviewed {{freelancerName}}
+   {{userName}} Reviewed <a class="freelancer-name-link" routerLink="/freelancer/{{review.freelancer}}" routerLinkActive="active" target="_blank">{{freelancerName}}</a> 
   </div>
   <div class="row space-between mr-15 ml-15">
     <p-rating [(ngModel)]="review.rating" readonly="true" [cancel]="false"/>

@@ -13,7 +13,7 @@ const routes: Routes = [{
   component: SubmitReviewComponent
 },
 {
-  path:'freelancer-review',
+  path:'freelancer/:id',
   component: FreelancerReviewComponent
 },
 ];
