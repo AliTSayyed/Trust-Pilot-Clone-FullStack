@@ -143,6 +143,17 @@ def freelancer_reviews(request, id):
   serializer = ReviewsSearializer(reviews_of_freelancer, many=True)
   return Response(serializer.data)
 
+@api_view(['GET']) # get all the reviews for a specific freelancer 
+def user_reviews(request, id):
+  try: # check if freelancer exists
+    user = Users.objects.get(pk=id) 
+  except Users.DoesNotExist:
+    return Response(status=status.HTTP_404_NOT_FOUND)
+  reviews_of_user = Reviews.objects.filter(user=id)
+  serializer = ReviewsSearializer(reviews_of_user, many=True)
+  return Response(serializer.data)
+
+
 @api_view(['GET']) # end point for sorting and filtering reviews
 def sort_and_filter_reviews(request):
   if request.method == 'GET':

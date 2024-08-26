@@ -1,1 +1,10 @@
-<p>user-review works!</p>
+<!--Title-->
+<div class="title row justify-center">
+  You Are Viewing All of
+  <span class="user-name"> {{ user.user_name }}'s </span> Reviews &#9998;
+</div>
+
+<!-- All Related User Reviews -->
+<div class="user-reviews column">
+  <app-review *ngFor="let review of userReviews" [review]="review"></app-review>
+</div>

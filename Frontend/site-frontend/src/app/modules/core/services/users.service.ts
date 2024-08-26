@@ -16,4 +16,8 @@ export class UsersService {
       responseType: 'json'
     });
   }
+
+  getOneUser = (url:string, options?:Options): Observable<User> => {
+    return this.apiService.get(url);
+  }
 }

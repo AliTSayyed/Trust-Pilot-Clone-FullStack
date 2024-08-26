@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/users/', views.user_list),
     path('api/users/<int:id>', views.user_details),
     path('api/reviews/freelancers/<int:id>', views.freelancer_reviews),
+    path('api/reviews/users/<int:id>', views.user_reviews),
     path('api/sort_and_filter_reviews/', views.sort_and_filter_reviews),
     path('admin/', admin.site.urls),
 ]

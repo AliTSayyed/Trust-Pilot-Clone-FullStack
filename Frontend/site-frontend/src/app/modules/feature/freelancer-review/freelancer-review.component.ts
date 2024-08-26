@@ -18,7 +18,6 @@ export class FreelancerReviewComponent {
     private route: ActivatedRoute
   ) {}
 
-  reviews: Review[] = [];
 
   freelancerReviews: Review[] = [];
 
@@ -82,13 +81,11 @@ export class FreelancerReviewComponent {
   }
 
   fetchFreelancerReview(id: string) {
-    const freelancerID: number = Number(id);
     this.reviewService
-      .getFreelancerReviews(`http://127.0.0.1:8000/api/reviews`)
-      .subscribe((reviews: Reviews) => {
-        this.freelancerReviews = reviews.reviews.filter(
-          (review) => review.freelancer === freelancerID
-        ); // if the review has the freelancer ID === to the ID of the route, add it to the freelancerReview list.
+      .getReviewsNoParam(`http://127.0.0.1:8000/api/reviews/freelancers/${id}`)
+      .subscribe((reviews: Review[]) => {
+        this.freelancerReviews = reviews // if the review has the freelancer ID === to the ID of the route, add it to the freelancerReview list.
+        console.log(this.freelancerReviews);
         this.getScore(); // calculate score as well since this.freelancerReviews is in the same scope.
       });
   }

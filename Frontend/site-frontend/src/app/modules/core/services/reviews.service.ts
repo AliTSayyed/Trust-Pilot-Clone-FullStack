@@ -18,7 +18,7 @@ export class ReviewsService {
     });
   }
 
-  getFreelancerReviews = (url: string): Observable<Reviews> => {
+  getReviewsNoParam= (url: string): Observable<Review[]> => {
     return this.apiService.get(url, {
       responseType: 'json',
     });
