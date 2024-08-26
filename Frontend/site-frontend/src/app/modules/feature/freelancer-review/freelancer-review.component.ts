@@ -85,7 +85,6 @@ export class FreelancerReviewComponent {
       .getReviewsNoParam(`http://127.0.0.1:8000/api/reviews/freelancers/${id}`)
       .subscribe((reviews: Review[]) => {
         this.freelancerReviews = reviews // if the review has the freelancer ID === to the ID of the route, add it to the freelancerReview list.
-        console.log(this.freelancerReviews);
         this.getScore(); // calculate score as well since this.freelancerReviews is in the same scope.
       });
   }
@@ -133,6 +132,5 @@ export class FreelancerReviewComponent {
       fiveStarPercentage:
         (this.stars.fiveStar / this.freelancerReviews.length) * 100,
     };
-    console.log(this.starRatings);
   }
 }

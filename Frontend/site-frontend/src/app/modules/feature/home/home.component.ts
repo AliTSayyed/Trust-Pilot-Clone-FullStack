@@ -16,6 +16,7 @@ export class HomeComponent {
   reviews: Review[] = [];
   
   rows:number = 9;
+  first = 0;
   totalRecords: number = 0;
 
   // take use to submit-review page to write a review
@@ -32,12 +33,13 @@ export class HomeComponent {
   }
 
   onPageChange(event: any){
-    this.fetchReviews(event.page, event.rows); // this will update what reviews are shown when the paginator is interacted with
+    const pageIndex = event.page + 1; // primeng paginator starts at page 0 but django starts at page 1. Need to adjust for 0 based index. 
+    this.fetchReviews(pageIndex, event.rows);
+    this.first = event.first; // first keeps track of the index in the review list and knows what index item to start displaying on a certain page. 
   }
 
   fetchReviews(page:number, perPage:number){
     this.reviewService.getReviews('http://127.0.0.1:8000/api/reviews/',{page, perPage} ).subscribe((reviews: Reviews) => {
-      console.log(reviews.reviews);
       this.reviews = reviews.reviews;
       this.totalRecords = reviews.total;
     })

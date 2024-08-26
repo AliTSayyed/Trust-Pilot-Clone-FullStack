@@ -3,3 +3,10 @@ button{
   font-size: 20px;
   font-weight: 500;
 }
+
+.home { 
+  position: fixed;
+  bottom: 20px;  /* Distance from the bottom of the viewport */
+  right: 20px;   /* Distance from the right side of the viewport */
+  z-index: 100;  /* Ensure it stays above other elements */
+}
