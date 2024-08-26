@@ -36,15 +36,16 @@ export interface Reviews {
   totalPages: number;
 }
 
-export interface Review  {// get requests need to recieve a number, post requests need to send a string for users/user_name and freelancer/freelancer_name
+export interface Review {
+  // get requests need to recieve a number, post requests need to send a string for users/user_name and freelancer/freelancer_name
   id?: number;
-  user?: number; 
-  user_name?:string;
+  user?: number;
+  user_name?: string;
   rating: number;
   review_text: string;
   date: string;
   freelancer?: number;
-  freelancer_name?:string
+  freelancer_name?: string;
 }
 
 export interface PaginationParams {
@@ -65,4 +66,12 @@ export interface Freelancer {
 export interface User {
   id: number;
   user_name: string;
+}
+
+export interface Stars {
+  oneStar: number;
+  twoStar: number;
+  threeStar: number;
+  fourStar: number;
+  fiveStar: number;
 }

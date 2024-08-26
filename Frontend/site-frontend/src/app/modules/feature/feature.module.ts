@@ -14,9 +14,10 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RatingModule } from 'primeng/rating';
+import { UserReviewComponent } from './user-review/user-review.component';
 
 @NgModule({
-  declarations: [HomeComponent, SubmitReviewComponent, FreelancerReviewComponent],
+  declarations: [HomeComponent, SubmitReviewComponent, FreelancerReviewComponent, UserReviewComponent],
   imports: [
     CommonModule,
     FeatureRoutingModule,
