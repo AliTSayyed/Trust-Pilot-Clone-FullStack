@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RatingModule } from 'primeng/rating';
 import { UserReviewComponent } from './user-review/user-review.component';
+import { BackHomeButtonComponent } from "../shared/back-home-button/back-home-button.component";
 
 @NgModule({
   declarations: [HomeComponent, SubmitReviewComponent, FreelancerReviewComponent, UserReviewComponent],
@@ -22,7 +23,7 @@ import { UserReviewComponent } from './user-review/user-review.component';
     CommonModule,
     FeatureRoutingModule,
     HeaderComponent,
-    ButtonModule, 
+    ButtonModule,
     SharedModule,
     PaginatorModule,
     InputGroupModule,
@@ -31,6 +32,7 @@ import { UserReviewComponent } from './user-review/user-review.component';
     RatingModule,
     ReactiveFormsModule,
     FormsModule,
+    BackHomeButtonComponent
 ],
 })
 export class FeatureModule { }
