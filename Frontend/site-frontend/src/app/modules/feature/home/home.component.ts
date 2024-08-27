@@ -14,7 +14,9 @@ export class HomeComponent {
   constructor(private reviewService: ReviewsService, private router: Router){}
 
   reviews: Review[] = [];
-  
+  filteredReviews: Review[] = [];
+  isFiltered: boolean = false;
+
   rows:number = 9;
   first = 0;
   totalRecords: number = 0;
@@ -34,7 +36,11 @@ export class HomeComponent {
 
   onPageChange(event: any){
     const pageIndex = event.page + 1; // primeng paginator starts at page 0 but django starts at page 1. Need to adjust for 0 based index. 
-    this.fetchReviews(pageIndex, event.rows);
+    if (this.isFiltered){
+      this.paginateFilteredReviews(pageIndex, event.rows);
+    } else {
+      this.fetchReviews(pageIndex, event.rows)
+    }
     this.first = event.first; // first keeps track of the index in the review list and knows what index item to start displaying on a certain page. 
   }
 
@@ -48,4 +54,18 @@ export class HomeComponent {
   ngOnInit() {
     this.fetchReviews(1, this.rows); // when the page first loads, send the first 9 reviews from the database. More reviews can be seen with the paginator. 
   }
+
+  onReviewsFiltered(filteredReviews: Reviews){
+    this.isFiltered = true;
+    this.filteredReviews = filteredReviews.reviews;
+    this.paginateFilteredReviews(1, this.rows);
+  }
+
+  paginateFilteredReviews(page: number, perPage: number){
+    const start = (page-1) * perPage;
+    const end = start + perPage;
+    this.reviews = this.filteredReviews.slice(start,end);
+    this.totalRecords = this.filteredReviews.length;
+  }
+
 }

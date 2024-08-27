@@ -58,6 +58,18 @@ export interface PaginationParams {
   perPage: number;
 }
 
+export interface FilterParams {
+  [param: string]:
+    | string
+    | number
+    | boolean
+    | ReadonlyArray<string | number | boolean>;
+  sort_by: string[];
+  freelancer: number[];
+  page: number;
+  perPage: number;
+}
+
 export interface Freelancer {
   id: number;
   freelancer_name: string;

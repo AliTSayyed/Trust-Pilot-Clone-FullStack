@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { PaginationParams, Review, Reviews } from '../../../../types';
+import { FilterParams, PaginationParams, Review, Reviews } from '../../../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,13 @@ export class ReviewsService {
     });
   }
 
-  getReviewsNoParam= (url: string): Observable<Review[]> => {
+  getReviewsNoParam = (url: string): Observable<Review[]> => {
+    return this.apiService.get(url, {
+      responseType: 'json',
+    });
+  }
+
+  getReviewsNoPagination = (url: string): Observable<Reviews> => {
     return this.apiService.get(url, {
       responseType: 'json',
     });
@@ -26,5 +32,12 @@ export class ReviewsService {
 
   postReview = (url:string, body:Review): Observable<any> => {
     return this.apiService.post(url, body, {});
+  }
+
+  getSortedReviews  = (url:string, params:FilterParams): Observable<Reviews> => {
+    return this.apiService.get(url, {
+      params,
+      responseType: 'json',
+    });
   }
 }

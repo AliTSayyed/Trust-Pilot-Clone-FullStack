@@ -157,28 +157,52 @@ def user_reviews(request, id):
 @api_view(['GET']) # end point for sorting and filtering reviews
 def sort_and_filter_reviews(request):
   if request.method == 'GET':
+    page = request.query_params.get('page', 1)
+    per_page = request.query_params.get('perPage', 10)
+
+    reviews = Reviews.objects.all()
+
+    paginator = Paginator(reviews, per_page)
+
+    try:
+        reviews_page = paginator.page(page)
+    except PageNotAnInteger:
+        reviews_page = paginator.page(1)
+    except EmptyPage:
+        reviews_page = paginator.page(paginator.num_pages)
+
     reviews = Reviews.objects.all()
 
     # Apply query paramters
-    rating_param = request.GET.get('rating', None)
-    date_param = request.GET.get('date', None)
     freelancer_id_param = request.GET.get('freelancer', None)
 
     # if the query paramater exists, filter by the query paramater
-    if rating_param:
-      reviews = Reviews.objects.filter(rating=rating_param)
-    
-    if date_param: # if a date is sent in the url, need to parse it so that it can be compared with the reviews table data field. 
-            try:
-              # Parse the date from the query param
-              parsed_date = datetime.strptime(date_param, '%Y-%m-%d').date()  # Parse 'YYYY-MM-DD' format
-              reviews = reviews.filter(date__date=parsed_date)  # Filter by date (ignoring time)
-            except ValueError:
-                return Response({'error': 'Invalid date format. Use YYYY-MM-DD.'}, status=status.HTTP_400_BAD_REQUEST)
-
     if freelancer_id_param:
-      reviews = Reviews.objects.filter(freelancer=freelancer_id_param)
+      reviews = reviews.filter(freelancer=freelancer_id_param)
+    
+   # Apply sorting based on sort_by
+    sort_by = request.GET.getlist('sort_by', None)
+    if sort_by:
+        sort_fields = []
+        if 'rating_high_to_low' in sort_by:
+            sort_fields.append('-rating')
+        elif 'rating_low_to_high' in sort_by:
+            sort_fields.append('rating')
+        if 'date_newest_first' in sort_by:
+            sort_fields.append('-date')
+        elif 'date_oldest_first' in sort_by:
+            sort_fields.append('date')
+
+        # Apply the sorting based on the accumulated sort fields
+        if sort_fields:
+            reviews = reviews.order_by(*sort_fields)
 
     # send the filtered reviews 
     serializer = ReviewsSearializer(reviews, many=True)
-    return Response(serializer.data)
+    return  Response({
+        'reviews': serializer.data,
+        'total': paginator.count,
+        'page': reviews_page.number,
+        'perPage': per_page,
+        'totalPages': paginator.num_pages,
+    }, status=status.HTTP_200_OK)

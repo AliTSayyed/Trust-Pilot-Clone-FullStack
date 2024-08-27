@@ -33,7 +33,7 @@
 
 <!-- Filter Component -->
 <div class="filter">
-  <app-filter styleClass="custom-filter"></app-filter>
+  <app-filter styleClass="custom-filter" (reviewsFiltered)="onReviewsFiltered($event)"></app-filter>
 </div>
 
 <!-- Review boxes-->
