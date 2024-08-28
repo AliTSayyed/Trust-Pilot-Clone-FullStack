@@ -32,7 +32,7 @@ import { BackHomeButtonComponent } from "../shared/back-home-button/back-home-bu
     RatingModule,
     ReactiveFormsModule,
     FormsModule,
-    BackHomeButtonComponent
+    BackHomeButtonComponent,
 ],
 })
 export class FeatureModule { }

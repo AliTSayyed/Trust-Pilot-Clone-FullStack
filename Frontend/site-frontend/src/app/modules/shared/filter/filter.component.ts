@@ -70,6 +70,9 @@ export class FilterComponent {
   }
 
   applyFilters() {
+    if (this.selectedRatingSort === '' && this.selectedDateSort === '' && this.freelancerSearch === 0){
+      this.clearFilters();
+    }
     if (this.freelancerSearch === 0) {
       this.params = {
         sort_by: [this.selectedRatingSort, this.selectedDateSort],

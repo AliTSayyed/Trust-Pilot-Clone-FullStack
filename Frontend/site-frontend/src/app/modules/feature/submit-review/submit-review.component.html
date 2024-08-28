@@ -1,68 +1,87 @@
 <!--Review Post Section-->
 <div class="main-post-section column">
-  <div class="title-image-top">
-    <div class="title-content">
-      <div class="main-post-title">Worked with a Freelancer?</div>
-      <div class="title-caption">Tell us about your experience!</div>
-      <div class="title-required">All Fields Required<span class="red-astricks">*</span></div>
+  <ng-container *ngIf="!reviewSubmitted; else thankYouMessage">
+    <div class="title-image-top">
+      <div class="title-content">
+        <div class="main-post-title">Worked with a Freelancer?</div>
+        <div class="title-caption">Tell us about your experience!</div>
+        <div class="title-required">
+          All Fields Required<span class="red-astricks">*</span>
+        </div>
+      </div>
+      <div class="review-icon">
+        <img class="review-image" src="images/reviews-icon.png" />
+      </div>
     </div>
-    <div class="review-icon">
-      <img class="review-image" src="images/reviews-icon.png" />
-    </div>
-  </div>
 
-  <form class="column gap-1" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
-    <!-- Name Field -->
-    <div class="name-input">
-      <p-inputGroup class="Name-field">
-        <input
-          class="form-control"
-          formControlName="name"
-          pInputText
-          placeholder="Name"
-        />
-      </p-inputGroup>
-    </div>
-    <div class="freelancer-input">
-      <p-inputGroup class="Name-field">
-        <input
-          class="form-control"
-          formControlName="freelancer"
-          pInputText
-          placeholder="Freelancer"
-        />
-      </p-inputGroup>
-    </div>
-    <div class="rating-container">
-      <div class="rating-field">Rating (1-5)</div>
-      <p-inputGroup>
-        <p-rating formControlName="rating" [cancel]="false" />
-      </p-inputGroup>
-    </div>
-    <!-- Textarea for a longer text input (like a review or comment) -->
-    <div>
-      <p-inputGroup>
-        <textarea
-          class="form-control review-input"
-          formControlName="review_text"
-          placeholder="Write your review here"
-          required
-        ></textarea>
-      </p-inputGroup>
-    </div>
-    <div class="submit-button row">
-      <!-- Submit button -->
-      <button pButton label="Cancel" icon="pi pi-times" severity="danger" (click)="homePage()"></button>
-      <button
-        pButton
-        label="Submit Review"
-        icon="pi pi-check"
-        type="submit"
-        severity="primary"
-        [disabled]="!reviewForm.valid"
-      ></button>
-    </div>
-  </form>
+    <form class="column gap-1" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="name-input">
+        <p-inputGroup class="Name-field">
+          <input
+            class="form-control"
+            formControlName="name"
+            pInputText
+            placeholder="Name"
+          />
+        </p-inputGroup>
+      </div>
+      <div class="freelancer-input">
+        <p-inputGroup class="Name-field">
+          <input
+            class="form-control"
+            formControlName="freelancer"
+            pInputText
+            placeholder="Freelancer"
+          />
+        </p-inputGroup>
+      </div>
+      <div class="rating-container">
+        <div class="rating-field">Rating (1-5)</div>
+        <p-inputGroup>
+          <p-rating formControlName="rating" [cancel]="false" />
+        </p-inputGroup>
+      </div>
+      <!-- Textarea for a longer text input (like a review or comment) -->
+      <div>
+        <p-inputGroup>
+          <textarea
+            class="form-control review-input"
+            formControlName="review_text"
+            placeholder="Write your review here"
+            required
+          ></textarea>
+        </p-inputGroup>
+      </div>
+      <div class="submit-button row">
+        <!-- Submit button -->
+        <button
+          pButton
+          label="Cancel"
+          icon="pi pi-times"
+          severity="danger"
+          (click)="homePage()"
+        ></button>
+        <button
+          pButton
+          label="Submit Review"
+          icon="pi pi-check"
+          type="submit"
+          severity="primary"
+          [disabled]="!reviewForm.valid"
+        ></button>
+      </div>
+    </form>
+  </ng-container>
+
+   <!-- Thank You Message -->
+    <ng-template #thankYouMessage>
+      <div class="thank-you column align-center justify-center gap-1">
+        <h2> Thank You For Your Review!</h2>
+        <button pButton label="Write Another Review" icon="pi pi-pencil" (click)="writeAnotherReview()"></button>
+      </div>
+    </ng-template>
 </div>
+
 
 <app-back-home-button></app-back-home-button>

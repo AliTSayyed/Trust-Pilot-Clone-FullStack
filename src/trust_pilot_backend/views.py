@@ -15,7 +15,8 @@ def review_list(request):
     per_page = request.query_params.get('perPage', 10)
 
     reviews = Reviews.objects.all()
-
+    reviews = reviews.order_by('-date')
+    
     paginator = Paginator(reviews, per_page)
 
     try:
@@ -140,6 +141,7 @@ def freelancer_reviews(request, id):
   except Freelancers.DoesNotExist:
     return Response(status=status.HTTP_404_NOT_FOUND)
   reviews_of_freelancer = Reviews.objects.filter(freelancer=id)
+  reviews_of_freelancer = reviews_of_freelancer.order_by('-date') # give the reviews back with the newest first. 
   serializer = ReviewsSearializer(reviews_of_freelancer, many=True)
   return Response(serializer.data)
 
@@ -150,6 +152,7 @@ def user_reviews(request, id):
   except Users.DoesNotExist:
     return Response(status=status.HTTP_404_NOT_FOUND)
   reviews_of_user = Reviews.objects.filter(user=id)
+  reviews_of_user = reviews_of_user.order_by('-date') # give the reviews back with the newest first. 
   serializer = ReviewsSearializer(reviews_of_user, many=True)
   return Response(serializer.data)
 

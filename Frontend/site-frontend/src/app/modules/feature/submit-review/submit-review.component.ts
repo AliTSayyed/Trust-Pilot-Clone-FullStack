@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class SubmitReviewComponent {
   constructor(private reviewService: ReviewsService, private router: Router) {}
 
+  reviewSubmitted: boolean = false;
+
   // take use to submit-review page to write a review
   homePage() {
     this.router.navigate(['']);
@@ -53,10 +55,12 @@ export class SubmitReviewComponent {
 
       // Directly submit the review to the backend
       this.submitReview(review);
-      console.log(review);
-      console.log('Review sent');
-
-      this.reviewForm.reset();
+      this.reviewSubmitted = true;
     } 
+  }
+
+  writeAnotherReview(){
+    this.reviewSubmitted = false;
+    this.reviewForm.reset();
   }
 }
