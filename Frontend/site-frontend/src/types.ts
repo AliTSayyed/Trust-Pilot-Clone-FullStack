@@ -1,5 +1,7 @@
 import { HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
 
+// this file is used to declare the types of different objects created in this project. Ensures type safety. 
+
 export interface Options {
   // this is the interface for the options a get request can have
   headers?:
@@ -78,12 +80,4 @@ export interface Freelancer {
 export interface User {
   id: number;
   user_name: string;
-}
-
-export interface Stars {
-  oneStar: number;
-  twoStar: number;
-  threeStar: number;
-  fourStar: number;
-  fiveStar: number;
 }

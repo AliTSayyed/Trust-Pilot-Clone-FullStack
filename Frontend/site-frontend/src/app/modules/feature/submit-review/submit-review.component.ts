@@ -12,14 +12,15 @@ import { Router } from '@angular/router';
 export class SubmitReviewComponent {
   constructor(private reviewService: ReviewsService, private router: Router) {}
 
+  // variable to keep track of what page to display (submit page or thank you page)
   reviewSubmitted: boolean = false;
 
-  // take use to submit-review page to write a review
+  // cancel button click takes user to back to the homepage
   homePage() {
     this.router.navigate(['']);
   }
 
-  // this is the object created when a user fills in the form
+  // this is the object created when a user fills in the form. 
   reviewForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
     freelancer: new FormControl('', [Validators.required]),
@@ -27,6 +28,7 @@ export class SubmitReviewComponent {
     review_text: new FormControl('', [Validators.required]),
   });
 
+  // this is the post method, takes in a review object
   submitReview(review: Review) {
     this.reviewService
       .postReview('http://127.0.0.1:8000/api/reviews/', review)
@@ -40,6 +42,7 @@ export class SubmitReviewComponent {
       });
   }
 
+  // when the submit button is pressed the review object is submitted and sent to the backend. 
   onSubmit() {
     if (this.reviewForm.valid) {
       const reviewObj = this.reviewForm.value;
@@ -55,11 +58,13 @@ export class SubmitReviewComponent {
 
       // Directly submit the review to the backend
       this.submitReview(review);
+      // show thank you page
       this.reviewSubmitted = true;
-    } 
+    }
   }
 
-  writeAnotherReview(){
+  // show the submission page
+  writeAnotherReview() {
     this.reviewSubmitted = false;
     this.reviewForm.reset();
   }

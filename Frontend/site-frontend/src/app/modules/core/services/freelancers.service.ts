@@ -16,7 +16,7 @@ export class FreelancersService {
       responseType: 'json',
     });
   }
-
+  // Same get request but it is returning an observable of type Freelancer not an array. Gets only 1 freelancer. 
   getOneFreelancer = (url: string, options?:Options): Observable<Freelancer> => {
     return this.apiService.get(url, {
       responseType: 'json',

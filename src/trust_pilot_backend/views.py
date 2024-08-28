@@ -1,4 +1,3 @@
-from datetime import datetime
 from .models import Reviews, Freelancers, Users
 from .serializer import ReviewsSearializer, FreelancersSearializer, UsersSearializer
 from rest_framework.decorators import api_view
@@ -7,29 +6,39 @@ from rest_framework import status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # create views for CRUD operations and logic for backend
+# the name of each function will be specfied with a url path in urls.py 
 
 @api_view(['GET', 'POST']) # retrieve all the reviews and post a review 
 def review_list(request): 
   if request.method == 'GET':
+    # need to handle pagination to display reviews 
+    # front end will send the paramater of how many items per page and what page the user is on
+    # store those query params as values to send back the right selection of reveiws from the database. 
     page = request.query_params.get('page', 1)
     per_page = request.query_params.get('perPage', 10)
 
+    # create a reviews object that will have all the database entries in it 
     reviews = Reviews.objects.all()
+    # organize the reviews by date so it looks normal for users. 
     reviews = reviews.order_by('-date')
     
+    # this is a django paginator, it takes all the reviews (data), and te amount of reviews to display.
     paginator = Paginator(reviews, per_page)
 
+    # create variable reviews_page which will store the exact reviews to be displayed based on the page we are on. 
     try:
         reviews_page = paginator.page(page)
     except PageNotAnInteger:
+        # go back to page 1 if a wrong page is input 
         reviews_page = paginator.page(1)
     except EmptyPage:
+        # if there is no page, go to the last page. 
         reviews_page = paginator.page(paginator.num_pages)
 
     # Serialize the reviews on the current page
     serializer = ReviewsSearializer(reviews_page, many=True)
 
-    # Return the paginated response
+    # Return the paginated response. The data includes the specific range of reviews from the database we wanted plus data that will be used for the paginator component in the front end. 
     return Response({
         'reviews': serializer.data,
         'total': paginator.count,
@@ -38,6 +47,7 @@ def review_list(request):
         'totalPages': paginator.num_pages,
     }, status=status.HTTP_200_OK)
 
+  # if a post request is sent to this api, then serialize the data and then store it in the database. Serializer will take care of processing data to ensure correctness before adding it to the database. 
   elif request.method == 'POST':
     serializer = ReviewsSearializer(data=request.data) # take the request data, and pass it into the serailzer
     if serializer.is_valid():
@@ -160,6 +170,7 @@ def user_reviews(request, id):
 @api_view(['GET']) # end point for sorting and filtering reviews
 def sort_and_filter_reviews(request):
   if request.method == 'GET':
+    # Because sorted and filtered reviews are its own path, need to again set up pagination so reviews are displayed in the exact same way non sorted/filtered reviews are. 
     page = request.query_params.get('page', 1)
     per_page = request.query_params.get('perPage', 10)
 

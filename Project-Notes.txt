@@ -1,0 +1,141 @@
+The following document contains the genral steps taken to create this freelancer review site ("LancerRank"). 
+The backend was created using django, django-rest-framework, and django-cors-headers.
+The database used was the defualt sqlite from django. (May change it postgresql in the future).
+The frontend was created using angular. It contains a modules folder for all the sperate modules with their own components. Themes and UI elements were imported using PrimeNG.
+
+1. Backend Notes
+- To start creating a django project you first need to create a folder which you will create as a virtual environment. 
+- Virtual env is helpful for the python interpreter. It avoids any dependecy conflicts with other projects. It also means the venv must be active when working in that folder. 
+- To create a virtual env cd into the folder using terminal/shell and run virtualenv . ('.' means this folder)
+- To activate the venv run .\Scripts\activate (macOS has a different command).
+- Once the venv is activate run pip install django, pip install djangorestframework, and pip install django-cors-headers (cors allows for multiple ports to be listend to)
+- Once installed, you can run pip freeze to check what is installed in your venv. You can deactivate your venv by running deactivate. Then run pip freeze and you should not see the same installations since they are only on the activated venv. 
+
+- To create a django project run django-admin startproject (projectname) . (the '.' specifies the folder you are in)
+- Now cd into the src folder. You run commands related to the django project with the folder that has manage.py. Usually this is the src folder in the project. 
+- Run Python manage.py runserver to check if everything works. Should open up a port with your default site. 
+- Now you can create multiple apps in django each 'app' will contian its own functionality and purpose. But for smaller projects like LancerRank, one app was needed. 
+- If you want to create an app run python manage.py startapp (appname). 
+
+- Next run manage.py migrate. This will migrate the database schema, needs to be run everytime models.py is changed or when the project is initally made.
+- Next go to the settings.py and add your app (in this project that was trust_pilot_backend) to the installed apps list. 
+- Also add djangorestframework and django-cors-headers to the installed apps. 
+- Set up cors in the settings.py (various configurations and allow for your frontend port to be an origin)
+
+- Now its time to start creating the project. First start by creating your models. Dango uses and ORM to work with the database. 
+- In your app create a new file called models.py. Write "from django.db import models" at the top of the page. Then create your tables (models).
+- Each table (model) is a class that inherits models.Model. The instance variables of that class are the various rows in the table with their respective constraints. 
+- Remember to run python manage.py makemigration (appname) and python manage.py migrate everytime a model is change or updated. 
+
+- Next create a file called admin.py and import "from django.contrib import admin". This will allow you to have a django admin page so you can manage your database entries from the admin stie before setting up crud operations. 
+- Register the models for the admin. 
+- Create a superuser by running python manage.py createsuperuser (can give a blank email and basic username and pass for quick access)
+
+- Next create a searializer file called searializer.py. The searializer is going to process the incoming data from the frontend and process sending data to the backend.
+- Must set up the searializer for each model so that the incoming json data can be converted back to a model object for the model class. Then the model object can be turned into database entries and furhter processing can be done and sent back to the front end. 
+- In the searializer you create a class for each model you have. In that model you create a meta class that will contain the model you are using and the fields the model will accept. Any errors here will lead to no data being processed. 
+- In this project the Review model had a User and Freelancer field that were foreign key numbers. The issue is that post reuqest will not contian a number but instead a user_name and freelancer_name. So the data needs to be searialized to accept user_name and freelancer_name as well as their ids for the GET request. 
+- To process the review data, user and freealancer were created as read only fields. That way the GET request will only use those fields. On the other hand, user_names and freelancer_names are write only. That way the POST request will only use those fields and not the user and freelancer number. 
+- This keeps users and freelancers unique and users will not have to send a number to submit a review but instead a freelancer name. 
+
+- Next create views. Views can be class based or function based. In this project my views are function based so I can better understand whats going on. Class based is another layer of abstraction (good to use once you understand function based views)
+- Views are where your CRUD operations will be defined for each model. Without a view, there is no api for you to send data to. 
+- Create a views.py file and import "from rest_framework.decorators import api_view". Have this decorator above each view function. 
+- Each decorator will specify what crud operation it handles (ex: @api_view(['GET', 'POST']) )
+- The name of each function will be specified with a url path in urls.py. These urls will be used with the front end. 
+
+- The final step is to include all the appropriate paths for your views in urls.py. These are where you declare the url path to the view function which will then allow for data processing. 
+- Import "from django.urls import path" and then declare paths like so: "path('api/reviews/users/<int:id>', views.user_reviews)" where query params can also be accepted. 
+
+
+2. Frontend Notes 
+(Creating a project, making modules, creating components in those modules, and setting up routing)
+- install the latest version of node
+- Install angular by running npm install -g @angular/cli
+- Create the folder where you want your front end to be created
+- I started the angular project by running ng new (projectname) 
+- run ng serve to load the front end on the browser 
+
+- Next I created the essential modules with ng generate module modules/(module name). These modules will be in the src/app/ folder.
+- A Modules contian related components. Each component is a building block and its purpose is to not write the same code again if mulitple pages use the same feature. 
+- Each component will have its own logic (componentname.component.ts file), html, scss, and testing file. This is how you will create unique building blocks that can be repeated simply by declaing the component in the html of anothe component.
+
+- Create a component in the module with ng generate component modules/(module name)/(component name). Set --standalone=false if i want the component to be dependent only on the modules dependencies. 
+- If the component is not standalone declare them in the (module name).modules.ts file.
+- If a component is standalone then import any necessary modules into its (component name).component.ts file. 
+- Many modules/ components used require imports from other modules. These are declared in the module.ts file or (if standalone) the componenet.ts file. 
+
+(Paths)
+- The index.html only loads the app root. This will then load all the components that are requried per path. 
+- App.component has a router-outlet which routes you to the correct component based on the front end url path. 
+- For example the app.routes.ts folder routes you to the feture module so a user will immediately see this module and its '' path when the page is initally loaded:
+  Ex: import { Routes } from '@angular/router';
+
+export const routes: Routes = [{
+  path: '',
+  loadChildren: () => 
+    import('./modules/feature/feature.module').then(
+      (m) => m.FeatureModule
+    )
+}]
+;
+
+- Likewise you need to set up routing inside the modules (for each component). This is called in moudle routing ie. url: '/feature-module-path/component-path' is set up in the (module name)-routing.module.ts file.  
+- Here is the example of the path ''/'' which is the default path users will see when on the site aka just '/'
+    Ex: const routes: Routes = [{
+    path:'',
+    component: HomeComponent
+  }].
+- In this project there is just one route for loading a specified module in app.routes.ts and 4 in module routes for the feature components that display the different pages. 
+
+- If i want to create components for another module that is not meant to be a main page, such as the shared module which contians things like the header, footer, etc. I need to create them in a new module like before.
+- Go to the component and change its html and scss to what you want. 
+- Then go to to the (module name).module.ts file and import the component (since stand alone was true it must be imported). Then export the component.
+- Go to app.components.ts and import the exported components (header and footer in this case).
+- Since I always want the header and footer to appear, i can simply put these components on the app.component.html and they will always appear no matter the route. 
+  Ex: 
+    <!-- Header -->
+    <app-header></app-header>
+
+    <!--Wrapper-->
+    <router-outlet></router-outlet> 
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+- app.component.ts is what appears on the screen. you can choose what is displayed on the screen my modifying the html of app.component OR you set the app.routes.ts  TO SHOW SPECIFIC COMPONENTS YOU WANT BASED ON A PATH A USER IS ON.
+- Style the site with scss, also I am using Primeng for ui tools. Run npm install primeng --save to use primeng tools. 
+
+(Styling)
+- Styles are created using SCSS. There is a styles.scss file in the src folder. This is where general scss styles can be automatically applied to every component you create.
+- I have also imported a theme from primeng to make styling faster and building certain ui components faster (like the paginator)
+- I also  have a folder called styles in src folder. It contians a file called variables.scss. I create variables that can be used to call repetitve stylings such as color, shadows, etc on any component. Any change here will change all componets that use these variables. 
+- In each component you can style the html in their respective scss file. 
+- You also set up the html of each component in their respective html file. 
+
+(Fethcing Data From the Backend/ Core Module)
+- Create a module called core by running ng generate module module/core 
+- This folder will contain all the services that will be used to get data from the backend. 
+- Create a service (not a component) by running ng generate service module/core/services 
+- A service is an encapsulated logic that is meant to be reused across multiple components. 
+- The core module has a api service, review service, freelancer service, and user service. 
+- The apiService is used in every service that will call to a backend. 
+- The various reviewService, freealancerService, and userServices in this project make use of that apiService to get/send data to/from the backend 
+- These services are called when creating componenets. For example, fethcing all the reviews is done using the reviewService. The reviewService uses the apiService to fetch the data from the given api.
+
+(Feature Module)
+- This module contians the home component, the submit review compoennt, the freelancer review componet, and the user reviews componets. 
+- all the frontend url paths are in this module 
+- This modules has all the different pages that can be displayed on the site. 
+- The home componet has a section for a title, an image, two buttons (one to browse reveiws and one to go to the submit review page), a filter bar, and an area to display the reviews.
+- The submit review componet is a form that takes in a name, freelancer name, rating, and reveiw (text). All fields are required. After submiting a reveiw the user as an option to write another review. 
+- The freelancer review componet displays the freelancer profile which contains the freelancer name, thier overall rating (average), and a bargraph showing the ratio of stars they got. 
+- The user review component displays all the reviews a user gave. 
+
+(Shared Module)
+- This module contains componets that are used in various other components. This includes a header, footer, back-home-button, filter, and a review. 
+- The header and footers take up space on every page and are imported in the app.compoennt.html. 
+- The back-home-button is used in all pages except for the home page so users can return to the home page. 
+- The filter is used in the homepage but contians its logic for filtering reviews based on user interaction 
+- The review is how the reveiw box will look like and takes in the data from the reivews to display it dynamically 
+

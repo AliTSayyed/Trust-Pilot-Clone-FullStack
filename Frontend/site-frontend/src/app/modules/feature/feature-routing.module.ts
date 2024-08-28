@@ -14,11 +14,11 @@ const routes: Routes = [{
   component: SubmitReviewComponent
 },
 {
-  path:'freelancer/:id',
+  path:'freelancer/:id', // use id to specify the freelancer 
   component: FreelancerReviewComponent
 },
 {
-  path:'user/:id',
+  path:'user/:id', // use id to specify the user 
   component: UserReviewComponent
 },
 ];
