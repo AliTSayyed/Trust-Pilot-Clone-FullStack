@@ -2,9 +2,9 @@
 
 A trust pilot clone site for freelancer reviews.
 
-This full stack project was created using django for the backend with its sqlite database and angular for the front end. 
+This full stack project was created using Django for the backend with its sqlite database and Angular for the frontend. 
 
-Project details can be found in the project-Notes.txt file.
+Project details can be found in the Project-Notes.txt file.
 
 Below are the APIs used in this project. 
 
