@@ -3,15 +3,14 @@ A trust pilot clone site for freelancer reviews.
 
 This full stack project was created using Django for the backend with its sqlite database and Angular for the frontend. 
 
+**Project details can be found in the Project-Notes.txt file (includes more installation details as well).**
+
 ## Features
 - Displays all reviews on homepage (includes a filter and a paginator)
 - Has a page for submitting reveiws. 
 - Each user and freelancer is unique no two people can have the same name. 
 - Clicking on a frelancer name will display their profile with their average score, how many of each rating they got, and all their reviews. 
 - Clicking on a user's name will display all the reveiws a user has posted on the site.
-
-
-Project details can be found in the Project-Notes.txt file (includes more installation details as well).
 
 ## Installation
 First clone the git repository and make sure you have python installed. 
