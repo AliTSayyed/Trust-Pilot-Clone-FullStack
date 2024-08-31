@@ -1,6 +1,28 @@
 @media (max-width: 768px) {
   .filter-bar {
-    width: 40px;
-    margin-left: 200px
+    width: 100%; /* Full width for the filter bar */
+    margin: 0 auto; /* Center the filter bar */
+    padding: 10px; /* Add padding for spacing */
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+
+  .custom-toolbar {
+    display: flex;
+    flex-direction: column; /* Stack toolbar items vertically */
+    align-items: center; /* Center all elements */
+    gap: 10px; /* Add spacing between toolbar groups */
+  }
+
+  .p-toolbar-group-left,
+  .p-toolbar-group-right {
+    width: 100%; /* Full width for toolbar groups */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    gap: 10px; /* Add spacing between elements */
+  }
+
+  .p-toolbar-group-left p-dropdown,
+  .p-toolbar-group-right button {
+    width: 100%; /* Full width for dropdowns and buttons */
   }
 }

@@ -1,5 +1,5 @@
 .freelancer-profile-container {
-  background-color: #efefef ;
+  background-color: #efefef;
   width: 40%;
   margin: auto;
   border-radius: 10px;
@@ -41,10 +41,9 @@
   padding-right: 80px;
   justify-content: center;
   width: 100%;
-
 }
 
-.star-rank{
+.star-rank {
   align-items: center;
   gap: 0.5rem;
 }
@@ -64,7 +63,6 @@
   gap: 0.5rem;
 }
 
-
 .bar {
   height: 20px;
   background-color: var(--secondary-color);
@@ -73,15 +71,57 @@
 
 /* user reviews */
 
-.freelancer-reviews{
+.freelancer-reviews {
   width: 50%;
   margin: auto;
   padding-bottom: 20px;
 }
 
-.home { 
-  position: fixed;
-  bottom: 20px;  /* Distance from the bottom of the viewport */
-  right: 20px;   /* Distance from the right side of the viewport */
-  z-index: 100;  /* Ensure it stays above other elements */
+@media only screen and (max-width: 768px) {
+  .freelancer-profile-container {
+    width: 100%; /* Full width on smaller screens */
+    padding: 10px; /* Adjust padding */
+  }
+
+  .freelancer-name {
+    font-size: 20px;
+  }
+
+  .overall-score {
+    font-size: 24px;
+  }
+
+  .freelancer-image {
+    width: 80px;
+  }
+
+  .bar {
+    height: 10px; /* Further reduce bar height */
+  }
+
+  .number-of-ratings {
+    width: 100%; /* Ensure full width */
+    gap: 8px; /* Adjust gap */
+  }
+
+  .star-bar-line {
+    display: flex; /* Ensure flex layout */
+    flex-direction: row; /* Ensure row layout */
+  }
+
+  .freelancer-reviews {
+    width: 100%; /* Make the container take full width */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 5px; /* Add padding inside the container */
+  }
+
+  .freelancer-reviews app-review {
+    width: 95%; /* Make each review wider */
+    margin-bottom: 5px; /* Add space between reviews */
+    padding: 5px; /* Add padding inside each review */
+    border-radius: 5px; /* Round the corners */
+    box-sizing: border-box; /* Include padding in width calculations */
+    overflow: hidden; /* Ensure content stays within the box */
+  }
+ 
 }

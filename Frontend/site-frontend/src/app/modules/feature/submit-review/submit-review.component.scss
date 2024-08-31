@@ -111,3 +111,53 @@ input{
 .thank-you{
   padding-top: 30%;
 }
+
+@media only screen and (max-width: 768px) {
+  .main-post-section {
+    width: 100%; /* Ensure full width on smaller screens */
+    max-width: 350px; /* Slightly smaller max width */
+    margin-top: 20px;
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .main-post-title {
+    font-size: 20px;
+  }
+
+  .title-caption,
+  .title-required {
+    font-size: 14px;
+  }
+
+  .review-image {
+    width: 100px;
+  }
+
+  .Name-field {
+    width: 75%;
+  }
+
+  .rating-field {
+    font-size: 14px;
+  }
+
+  textarea {
+    width: 70%;
+    height: 80px; /* Adjust textarea height */
+  }
+
+  .submit-button {
+    margin-top: -70px;
+  }
+
+  .submit-button button[pButton] {
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+
+  
+  .thank-you{
+    padding-top: 50%;
+  }
+
+}
