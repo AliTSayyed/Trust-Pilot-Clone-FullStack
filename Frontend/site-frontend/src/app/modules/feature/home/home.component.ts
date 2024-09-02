@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ReviewsService } from '../../core/services/reviews.service';
-import { Review, Reviews } from '../../../../types';
+import { Freelancer, Review, Reviews, User } from '../../../../types';
 import { Router } from '@angular/router';
+import { UsersService } from '../../core/services/users.service';
+import { FreelancersService } from '../../core/services/freelancers.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,12 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  constructor(private reviewService: ReviewsService, private router: Router) {}
+  constructor(
+    private reviewService: ReviewsService,
+    private router: Router,
+    private freelancerService: FreelancersService,
+    private userService: UsersService
+  ) {}
   // store the reviews, filtered reviews and if the reviews are filtered.
   reviews: Review[] = [];
   filteredReviews: Review[] = [];
@@ -19,6 +26,12 @@ export class HomeComponent {
   rows: number = 9;
   first = 0;
   totalRecords: number = 0;
+
+  // store all the freelancers to pass to the review component 
+  freelancers: Freelancer[] = [];
+
+  // store all the users to pass to the review component
+  users: User[] = [];
 
   // take use to submit-review page to write a review
   submissionPage() {
@@ -55,8 +68,28 @@ export class HomeComponent {
       });
   }
 
+  // The reviews object does not have a name, need to get it. The id will be used in routing.
+  fetchFreelancers() {
+    this.freelancerService
+      .getFreelancers('http://127.0.0.1:8000/api/freelancers/')
+      .subscribe((response: Freelancer[]) => {
+        this.freelancers = response;
+      });
+  }
+
+  // The reviews object does not have a name, need to get it. The id will be used in routing.
+  fetchUsers() {
+    this.userService
+      .getUsers('http://127.0.0.1:8000/api/users/')
+      .subscribe((response: User[]) => {
+        this.users = response;
+      });
+  }
+
   //on page initilization send the first 9 reviews from the database. More reviews can be seen with the paginator.
   ngOnInit() {
+    this.fetchFreelancers()
+    this.fetchUsers()
     this.fetchReviews(1, this.rows);
   }
 
@@ -66,7 +99,8 @@ export class HomeComponent {
     if (filteredReviews.perPage === 10) {
       this.isFiltered = false;
       this.ngOnInit();
-    } else {  // if not cleared, then display the filtered/sorted reveiws with pagination.
+    } else {
+      // if not cleared, then display the filtered/sorted reveiws with pagination.
       this.isFiltered = true;
       this.filteredReviews = filteredReviews.reviews;
       this.paginateFilteredReviews(1, this.rows);
@@ -77,7 +111,7 @@ export class HomeComponent {
   paginateFilteredReviews(page: number, perPage: number) {
     const start = (page - 1) * perPage;
     const end = start + perPage;
-    this.reviews = this.filteredReviews.slice(start, end); // this line updates what is shown on the screen to the filtered selection. 
+    this.reviews = this.filteredReviews.slice(start, end); // this line updates what is shown on the screen to the filtered selection.
     this.totalRecords = this.filteredReviews.length;
   }
 }

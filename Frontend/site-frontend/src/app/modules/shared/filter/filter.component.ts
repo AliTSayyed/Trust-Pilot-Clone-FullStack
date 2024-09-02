@@ -132,7 +132,6 @@ export class FilterComponent {
         this.reviews.perPage = 10; // instead of reviews.perPage, hard code 10 so it does not turn in to a string. Used in the homecomponet to check if clearFilters() was pressed.
         this.reviews.total = reviews.total;
         this.reviews.totalPages = reviews.totalPages;
-        console.log(this.reviews);
         this.reviewsFiltered.emit(this.reviews);
       });
   }

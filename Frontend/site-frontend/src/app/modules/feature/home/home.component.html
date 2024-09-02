@@ -36,9 +36,9 @@
   <app-filter styleClass="custom-filter" (reviewsFiltered)="onReviewsFiltered($event)"></app-filter>
 </div>
 
-<!-- Review boxes-->
+<!-- Review boxes, vairables in the app review are input into the review component-->
 <div class="reviews-display grid gap-1 space-between">
-  <app-review *ngFor="let review of reviews" [review]="review"></app-review>
+  <app-review *ngFor="let review of reviews" [review]="review" [freelancers]="freelancers" [users]="users"></app-review>
 </div>
 
 <!-- Paginator -->

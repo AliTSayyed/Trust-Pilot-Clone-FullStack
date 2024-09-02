@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { ReviewComponent } from './review/review.component';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
-import { Dropdown, DropdownModule } from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [FilterComponent, ReviewComponent],
@@ -23,7 +23,7 @@ import { Dropdown, DropdownModule } from 'primeng/dropdown';
     ButtonModule,
     RatingModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
   ],
   exports: [HeaderComponent, FooterComponent, FilterComponent, ReviewComponent],
   providers: [DatePipe]
