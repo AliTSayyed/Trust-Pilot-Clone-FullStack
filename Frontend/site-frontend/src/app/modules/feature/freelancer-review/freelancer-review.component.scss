@@ -1,66 +1,69 @@
+/* Freelancer Profile Container */
 .freelancer-profile-container {
   background-color: #efefef;
-  width: 40%;
-  margin: auto;
+  width: 100%; /* Reduced width */
+  max-width: 600px; /* Set a max-width to keep it smaller */
+  margin: auto; /* Center the container */
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   border: 5px solid var(--secondary-color);
+  padding: 10px; /* Reduced padding */
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* Single column layout */
+  gap: 10px; /* Add space between elements */
 }
 
+/* Freelancer Image Container */
 .freelancer-image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-  border-radius: 10px;
-  width: 100%;
-  margin-bottom: 10px;
+  margin: 5px 0; /* Reduced top and bottom margins */
 }
 
 .freelancer-name {
-  font-size: 30px;
+  font-size: 20px; /* Smaller font size */
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px; /* Reduced margin */
   color: var(--secondary-color);
+  text-align: center;
 }
 
 .freelancer-image {
-  width: 150px;
+  width: 100px; /* Smaller image */
+  margin-bottom: 5px; /* Reduced margin */
 }
 
 .overall-score {
-  font-size: 40px;
+  font-size: 24px; /* Smaller font size */
   font-weight: bold;
   color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 5px; /* Reduced margin */
 }
 
+
 .star-ratings-container {
-  margin: auto;
-  padding-right: 80px;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
   width: 100%;
 }
 
-.star-rank {
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .number-of-ratings {
-  height: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
+  align-items: center;
+  gap: 8px; /* Adjust gap between star bars */
 }
 
 .star-bar-line {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 0.5rem;
+  grid-template-columns: 2fr 1fr; /* Star bar and rating on the right */
+  gap: 10px; /* Space between bar and rating */
+  width: 100%;
 }
 
 .bar {
@@ -69,59 +72,21 @@
   border-radius: 2px;
 }
 
-/* user reviews */
-
+/* User reviews section */
 .freelancer-reviews {
-  width: 50%;
-  margin: auto;
-  padding-bottom: 20px;
+  width: 100%; /* Full width */
+  max-width: 600px; /* Optional: set a max-width */
+  margin: auto; /* Center the container horizontally */
+  padding: 20px; /* Padding inside the container */
+  display: flex;
+  flex-direction: column;
 }
 
-@media only screen and (max-width: 768px) {
-  .freelancer-profile-container {
-    width: 100%; /* Full width on smaller screens */
-    padding: 10px; /* Adjust padding */
-  }
-
-  .freelancer-name {
-    font-size: 20px;
-  }
-
-  .overall-score {
-    font-size: 24px;
-  }
-
-  .freelancer-image {
-    width: 80px;
-  }
-
-  .bar {
-    height: 10px; /* Further reduce bar height */
-  }
-
-  .number-of-ratings {
-    width: 100%; /* Ensure full width */
-    gap: 8px; /* Adjust gap */
-  }
-
-  .star-bar-line {
-    display: flex; /* Ensure flex layout */
-    flex-direction: row; /* Ensure row layout */
-  }
-
-  .freelancer-reviews {
-    width: 100%; /* Make the container take full width */
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 5px; /* Add padding inside the container */
-  }
-
-  .freelancer-reviews app-review {
-    width: 95%; /* Make each review wider */
-    margin-bottom: 5px; /* Add space between reviews */
-    padding: 5px; /* Add padding inside each review */
-    border-radius: 5px; /* Round the corners */
-    box-sizing: border-box; /* Include padding in width calculations */
-    overflow: hidden; /* Ensure content stays within the box */
-  }
- 
+/* Ensure each review is full width */
+.freelancer-reviews app-review {
+  width: 100%; /* Make each review take full width */
+  padding: 10px; /* Add padding */
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding is included in width */
+  overflow: hidden; /* Ensure content stays within the box */
 }
