@@ -84,13 +84,17 @@ export class FreelancerReviewComponent {
     five: 5,
   };
 
-  // Get freelancers and users to input into the review component. 
-  fetchFreelancersAndUsers() {
+  // Get freelancers to input into the review component.
+  fetchFreelancers() {
     this.freelancerService
       .getFreelancers('http://127.0.0.1:8000/api/freelancers/')
       .subscribe((response: Freelancer[]) => {
         this.freelancers = response;
       });
+  }
+
+  // Get users to input into the review component.
+  fetchUsers() {
     this.userService
       .getUsers('http://127.0.0.1:8000/api/users/')
       .subscribe((response: User[]) => {
@@ -164,13 +168,14 @@ export class FreelancerReviewComponent {
     };
   }
 
-    // on initilization, get the id from the url, if it exists, get the freelancer object and the reviews related to the freelancer.
-    ngOnInit(): void {
-      this.freelancerId = this.route.snapshot.paramMap.get('id');
-      if (this.freelancerId) {
-        this.fetchFreelancersAndUsers();
-        this.fetchFreelancer(this.freelancerId);
-        this.fetchFreelancerReview(this.freelancerId);
-      }
+  // on initilization, get the id from the url, if it exists, get the freelancer object and the reviews related to the freelancer.
+  ngOnInit(): void {
+    this.freelancerId = this.route.snapshot.paramMap.get('id');
+    if (this.freelancerId) {
+      this.fetchFreelancers();
+      this.fetchUsers();
+      this.fetchFreelancer(this.freelancerId);
+      this.fetchFreelancerReview(this.freelancerId);
     }
+  }
 }

@@ -36,14 +36,17 @@ export class UserReviewComponent {
   // store all the related user's reviews.
   userReviews: Review[] = [];
 
-  // Get freelancers and users to input into the review component.
-  fetchFreelancersAndUsers() {
+  // Get freelancers to input into the review component.
+  fetchFreelancers() {
     this.freelancerService
       .getFreelancers('http://127.0.0.1:8000/api/freelancers/')
       .subscribe((response: Freelancer[]) => {
         this.freelancers = response;
       });
+  }
 
+  // Get users to input into the review component.
+  fetchUsers() {
     this.userService
       .getUsers('http://127.0.0.1:8000/api/users/')
       .subscribe((response: User[]) => {
@@ -69,11 +72,12 @@ export class UserReviewComponent {
       });
   }
 
-   // on page initilization, get the user id from the url, if it exists, get the user object and all the reviews related to that user.
-   ngOnInit(): void {
+  // on page initilization, get the user id from the url, if it exists, get the user object and all the reviews related to that user.
+  ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
     if (this.userId) {
-      this.fetchFreelancersAndUsers();
+      this.fetchFreelancers();
+      this.fetchUsers();
       this.fetchUser(this.userId);
       this.fetchUserReviews(this.userId);
     }

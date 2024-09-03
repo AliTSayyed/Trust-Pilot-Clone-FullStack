@@ -54,6 +54,7 @@ export class FilterComponent {
   // on initilization on the home component, the filter will also fetch all the freelancers. Without this, no freelancer filtering can be done.
   ngOnInit() {
     this.fetchFreelancers();
+    this.clearFilters() // resets filters and makes sure home data loads in correctly
   }
 
   // get all the freelancers and then update the freelancerSortOptions to contain all the freelancers as options to sort reviews by.
