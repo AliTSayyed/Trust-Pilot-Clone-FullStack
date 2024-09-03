@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FreelancersService } from '../../core/services/freelancers.service';
-import { Freelancer, Review } from '../../../../types';
+import { Freelancer, Review, User } from '../../../../types';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewsService } from '../../core/services/reviews.service';
+import { UsersService } from '../../core/services/users.service';
 
 @Component({
   selector: 'app-freelancer-review',
@@ -10,14 +11,21 @@ import { ReviewsService } from '../../core/services/reviews.service';
   styleUrl: './freelancer-review.component.scss',
 })
 export class FreelancerReviewComponent {
-  // Keeps track of the freelancer's id. It is a string because the id from the url will be a string. The review.component.html will provide the id. 
+  // Keeps track of the freelancer's id. It is a string because the id from the url will be a string. The review.component.html will provide the id.
   freelancerId: string | null = null;
 
   constructor(
     private freelancerService: FreelancersService,
     private reviewService: ReviewsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UsersService
   ) {}
+
+  // store all the freelancers to pass to the review component
+  freelancers: Freelancer[] = [];
+
+  // store all the users to pass to the review component
+  users: User[] = [];
 
   // stores all the reviews related to the freelancer.
   freelancerReviews: Review[] = [];
@@ -76,16 +84,21 @@ export class FreelancerReviewComponent {
     five: 5,
   };
 
-  // on initilization, get the id from the url, if it exists, get the freelancer object and the reviews related to the freelancer.
-  ngOnInit(): void {
-    this.freelancerId = this.route.snapshot.paramMap.get('id');
-    if (this.freelancerId) {
-      this.fetchFreelancer(this.freelancerId);
-      this.fetchFreelancerReview(this.freelancerId);
-    }
+  // Get freelancers and users to input into the review component. 
+  fetchFreelancersAndUsers() {
+    this.freelancerService
+      .getFreelancers('http://127.0.0.1:8000/api/freelancers/')
+      .subscribe((response: Freelancer[]) => {
+        this.freelancers = response;
+      });
+    this.userService
+      .getUsers('http://127.0.0.1:8000/api/users/')
+      .subscribe((response: User[]) => {
+        this.users = response;
+      });
   }
 
-  // use the id to fetch the freelancer object 
+  // use the id to fetch the freelancer object
   fetchFreelancer(id: string) {
     this.freelancerService
       .getOneFreelancer(`http://127.0.0.1:8000/api/freelancers/${id}`)
@@ -94,24 +107,24 @@ export class FreelancerReviewComponent {
       });
   }
 
-  // use the id to fetch all the reviews for the freelancer. Filtering done in the backend. Call the get score here since this.freelancerReviews will be empty outside this scope. 
+  // use the id to fetch all the reviews for the freelancer. Filtering done in the backend. Call the get score here since this.freelancerReviews will be empty outside this scope.
   fetchFreelancerReview(id: string) {
     this.reviewService
       .getReviewsNoParam(`http://127.0.0.1:8000/api/reviews/freelancers/${id}`)
       .subscribe((reviews: Review[]) => {
-        this.freelancerReviews = reviews; 
+        this.freelancerReviews = reviews;
         this.getScore(); // calculate score as well since this.freelancerReviews is in the same scope.
       });
   }
 
-  // calculate the average score of the freelancer and keep track of how many of each star rating they have. Also keep track of the percentage since that will be used to display the bar graph with the correct ratios. 
+  // calculate the average score of the freelancer and keep track of how many of each star rating they have. Also keep track of the percentage since that will be used to display the bar graph with the correct ratios.
   getScore() {
     let freelancerScoreTotal: number = 0;
     let freelancerScore: string = '0.00';
     if (this.freelancerReviews.length !== 0) {
       this.freelancerReviews.forEach((freelancer) => {
         freelancerScoreTotal += freelancer.rating;
-        // for each rating, increment the stars object's field by one. 
+        // for each rating, increment the stars object's field by one.
         switch (freelancer.rating) {
           case 1:
             this.stars.oneStar++;
@@ -135,7 +148,7 @@ export class FreelancerReviewComponent {
         freelancerScoreTotal / this.freelancerReviews.length
       ).toFixed(1);
     }
-    // store the score and calculate the percentages. 
+    // store the score and calculate the percentages.
     this.score = freelancerScore;
     this.starRatings = {
       oneStarPercentage:
@@ -150,4 +163,14 @@ export class FreelancerReviewComponent {
         (this.stars.fiveStar / this.freelancerReviews.length) * 100,
     };
   }
+
+    // on initilization, get the id from the url, if it exists, get the freelancer object and the reviews related to the freelancer.
+    ngOnInit(): void {
+      this.freelancerId = this.route.snapshot.paramMap.get('id');
+      if (this.freelancerId) {
+        this.fetchFreelancersAndUsers();
+        this.fetchFreelancer(this.freelancerId);
+        this.fetchFreelancerReview(this.freelancerId);
+      }
+    }
 }

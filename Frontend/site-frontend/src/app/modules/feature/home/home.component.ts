@@ -27,7 +27,7 @@ export class HomeComponent {
   first = 0;
   totalRecords: number = 0;
 
-  // store all the freelancers to pass to the review component 
+  // store all the freelancers to pass to the review component
   freelancers: Freelancer[] = [];
 
   // store all the users to pass to the review component
@@ -68,29 +68,18 @@ export class HomeComponent {
       });
   }
 
-  // The reviews object does not have a name, need to get it. The id will be used in routing.
-  fetchFreelancers() {
+  // Get freelancers and users to input into the review component.
+  fetchFreelancersAndUsers() {
     this.freelancerService
       .getFreelancers('http://127.0.0.1:8000/api/freelancers/')
       .subscribe((response: Freelancer[]) => {
         this.freelancers = response;
       });
-  }
-
-  // The reviews object does not have a name, need to get it. The id will be used in routing.
-  fetchUsers() {
     this.userService
       .getUsers('http://127.0.0.1:8000/api/users/')
       .subscribe((response: User[]) => {
         this.users = response;
       });
-  }
-
-  //on page initilization send the first 9 reviews from the database. More reviews can be seen with the paginator.
-  ngOnInit() {
-    this.fetchFreelancers()
-    this.fetchUsers()
-    this.fetchReviews(1, this.rows);
   }
 
   // this will change the reviews data set to what the filter selection was
@@ -114,4 +103,10 @@ export class HomeComponent {
     this.reviews = this.filteredReviews.slice(start, end); // this line updates what is shown on the screen to the filtered selection.
     this.totalRecords = this.filteredReviews.length;
   }
+
+    //on page initilization send the first 9 reviews from the database. More reviews can be seen with the paginator.
+    ngOnInit() {
+      this.fetchFreelancersAndUsers();
+      this.fetchReviews(1, this.rows);
+    }
 }

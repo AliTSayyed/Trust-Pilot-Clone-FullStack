@@ -75,9 +75,9 @@ export class FilterComponent {
   applyFilters() {
     // if no filters are selected and apply filters is pressed, clear the filters and reset the data.
     if (
-      this.selectedRatingSort === '' &&
-      this.selectedDateSort === '' &&
-      this.freelancerSearch === 0
+      (this.selectedRatingSort === null || this.selectedRatingSort === '') &&
+      (this.selectedDateSort === null || this.selectedDateSort === '') &&
+      (this.freelancerSearch === null || this.freelancerSearch === 0)
     ) {
       this.clearFilters();
     } else if (this.freelancerSearch === 0) {
@@ -115,11 +115,11 @@ export class FilterComponent {
         this.reviews.perPage = reviews.perPage;
         this.reviews.total = reviews.total;
         this.reviews.totalPages = reviews.totalPages;
-        this.reviewsFiltered.emit(this.reviews); // send the filtered reviews object to the home component. 
+        this.reviewsFiltered.emit(this.reviews); // send the filtered reviews object to the home component.
       });
   }
 
-  // when the filters want to be reset, then create a reviews object with a per page value of 10. When the home component's onReviewsFiltered() function sees perPage === 10, it will reset the page to its ngOnInit. 
+  // when the filters want to be reset, then create a reviews object with a per page value of 10. When the home component's onReviewsFiltered() function sees perPage === 10, it will reset the page to its ngOnInit.
   resetReviews() {
     this.reviewService
       .getReviews('http://127.0.0.1:8000/api/reviews/', {
@@ -136,7 +136,7 @@ export class FilterComponent {
       });
   }
 
-  // clear the filters labels, values, and reset the reviews shown on the home page. 
+  // clear the filters labels, values, and reset the reviews shown on the home page.
   clearFilters() {
     this.selectedRatingSort = '';
     this.selectedDateSort = '';
