@@ -85,8 +85,7 @@
 /* Ensure each review is full width */
 .freelancer-reviews app-review {
   width: 100%; /* Make each review take full width */
-  padding: 10px; /* Add padding */
+  max-width: 500px;
   border-radius: 5px;
-  box-sizing: border-box; /* Ensure padding is included in width */
   overflow: hidden; /* Ensure content stays within the box */
 }
