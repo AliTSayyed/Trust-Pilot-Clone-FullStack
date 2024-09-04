@@ -10,8 +10,9 @@
   flex-direction: column;
   border-radius: 5px;
   box-shadow:  0 2px 10px rgba(0, 0, 0, 0.5);
-  padding-top: 15px;
+  padding-top: 5px;
   padding-left: 15px;
+  padding-bottom: 15px;
 }
 
 
@@ -53,9 +54,9 @@
   margin-top: 5px;
   font-size: 16px;
   font-weight: 700;
-  overflow-y: hidden;
   border: none;
   font-style: normal;
+  overflow: auto; /* Allow content to scroll if it overflows */
 }
 
 .freelancer-name-link, .user-name-link{
@@ -63,3 +64,43 @@
   color: black;
 }
 
+
+/* Media Query for screens less than 768px wide */
+@media (max-width: 768px) {
+  .review-box {
+    max-width: 100%; /* Ensure full width on small screens */
+    height: auto; /* Let the height adjust dynamically based on content */
+    padding: 10px; /* Increase padding for better spacing on small screens */
+  }
+
+  .user-container {
+    flex-direction: row; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    font-size: 18px; /* Reduce font size */
+    margin-left: 0;
+    padding: 5px; /* Reduce padding */
+  }
+
+  .user-icon-image {
+    width: 30px; /* Smaller image size */
+    height: 30px; /* Smaller image size */
+    margin-bottom: 5px; /* Add spacing below the image */
+  }
+
+  .review-date {
+    font-size: 14px; /* Reduce font size */
+  }
+
+  .review-description {
+    width: 100%; /* Full width on small screens */
+    font-size: 14px; /* Reduce font size */
+    height: auto; /* Let the height adjust dynamically */
+    margin-top: 10px; /* Adjust margin for better spacing */
+    overflow-y: auto; /* Ensure content can scroll vertically */
+  }
+
+  .freelancer-name-link,
+  .user-name-link {
+    font-size: 18px; /* Reduce font size */
+  }
+}
