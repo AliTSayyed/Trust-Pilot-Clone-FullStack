@@ -168,10 +168,15 @@ export class FreelancerReviewComponent {
     };
   }
 
+  showAlert(){
+    alert('User and freelancer names may not show on review boxes since the site is hosted with Git-Hub-Pages.\nRefresh the page if you have this problem.')
+  }
+
   // on initilization, get the id from the url, if it exists, get the freelancer object and the reviews related to the freelancer.
   ngOnInit(): void {
     this.freelancerId = this.route.snapshot.paramMap.get('id');
     if (this.freelancerId) {
+      this.showAlert();
       this.fetchFreelancers();
       this.fetchUsers();
       this.fetchFreelancer(this.freelancerId);

@@ -72,9 +72,14 @@ export class UserReviewComponent {
       });
   }
 
+  showAlert(){
+    alert('User and freelancer names may not show on review boxes since the site is hosted with Git-Hub-Pages.\nRefresh the page if you have this problem.')
+  }
+
   // on page initilization, get the user id from the url, if it exists, get the user object and all the reviews related to that user.
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
+    this.showAlert();
     if (this.userId) {
       this.fetchFreelancers();
       this.fetchUsers();
